@@ -1,28 +1,52 @@
 import React, { useState } from "react";
 
 export const PhoneInput = () => {
-  const [number, setNumber] = useState("");
   const [error, setError] = useState("");
   const [plusOneNumber, setPlusOneNumber] = useState("");
+  const [reformattedNumber, setReformattedNumber] = useState("");
 
   const handleChange = number => {
     console.log("e", number);
-    let digitsOnlyNumber = ("" + number).replace(/\D/g, "");
-    let usNumber = "+1" + digitsOnlyNumber;
+    let digitsOnlyNumber = number.replace(/\D/g, "");
+    let usNumber = "";
+    if (digitsOnlyNumber) {
+      usNumber = "+1 " + digitsOnlyNumber;
+    }
 
-    validate(usNumber);
-    setNumber(number);
+    let inputLength = digitsOnlyNumber.length;
+
+    let usFormattedNumber = "";
+
+    if (inputLength < 4) {
+      usFormattedNumber = digitsOnlyNumber;
+    } else if (inputLength < 7) {
+      usFormattedNumber = `(${digitsOnlyNumber.slice(
+        0,
+        3
+      )}) ${digitsOnlyNumber.slice(3, 6)}`;
+    } else if (inputLength <= 10) {
+      usFormattedNumber = `(${digitsOnlyNumber.slice(
+        0,
+        3
+      )}) ${digitsOnlyNumber.slice(3, 6)} - ${digitsOnlyNumber.slice(6, 11)}`;
+    }
+    console.log("inputLength", inputLength);
+    validateLength(digitsOnlyNumber);
+    setReformattedNumber(usFormattedNumber);
+    setPlusOneNumber(usNumber);
   };
-  const validate = usNumber => {
-    usNumber.length > 10
+  const validateLength = num => {
+    num.length > 10
       ? setError(
           "Sorry, your number is invalid, please enter a valid US number"
         )
       : setError("");
   };
+
   const reset = () => {
-    setNumber("");
+    setError("");
     setPlusOneNumber("");
+    setReformattedNumber("");
   };
 
   return (
@@ -39,20 +63,22 @@ export const PhoneInput = () => {
         }}
       >
         <div className="inputContainer__phoneDetails">
+          <label className="inputContainer__label">Phone:</label>
           <input
+            disabled={error ? true : false}
             type="string"
             className="inputContainer__Input"
             placeholder="Please add your phone number here - (xxx) xxx-xxxx"
-            value={number}
+            value={reformattedNumber}
             onChange={e => handleChange(e.target.value)}
           />
         </div>
         <p className="inputContainer__OutputField">
-          <span>Value: {number}</span>
+          <span>Value: {plusOneNumber}</span>
         </p>
         {error && (
           <>
-            <p className="errorMessage">{error}</p>
+            <p className="inputContainer__errorMessage">{error}</p>
           </>
         )}
         <button type="submit" className="inputContainer__Btn">

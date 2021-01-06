@@ -4,6 +4,11 @@ html {
   box-sizing: border-box;
   text-decoration: none;
   list-style-type: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *:focus {
@@ -15,10 +20,11 @@ html {
 $mainWhite: #e9e9e9;
 $generic-bg-hover: rgba(0, 0, 0, 0.5);
 $generic-bg: rgba(0, 0, 0, 0.25);
+$generic-bg: #836c6c;
 
 $border-radius: 8px;
 $border-radius-small: 4px;
-$font-size: 1.6rem;
+$font-size: 1rem;
 $transition: background-color 0.2s ease-in-out;
 
 // mixin ///////////////////////////////
@@ -63,11 +69,15 @@ $transition: background-color 0.2s ease-in-out;
 
 .inputContainer {
   background: #fff;
+  // width: 30vw;
   margin: 0 auto;
   padding: 1rem 3rem;
   border-radius: 5px;
   box-shadow: 0px 0px 3px 6px rgba(0, 0, 0, 0.0825);
   animation: 0.5s bounceIn forwards ease-in;
+  @include mq(900px) {
+    max-width: 90vw;
+  }
   &__Header {
     font-weight: 700;
     text-align: center;
@@ -85,6 +95,13 @@ $transition: background-color 0.2s ease-in-out;
     display: flex;
     font-weight: bold;
   }
+  &__label {
+    padding: 1rem;
+    background: grey;
+    color: white;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
   &__Input {
     width: 100%;
     padding: 1rem;
@@ -93,8 +110,13 @@ $transition: background-color 0.2s ease-in-out;
     border-bottom-right-radius: $border-radius;
     border-left: none;
     outline: none;
+    :focus {
+      background: red;
+      color: white;
+    }
   }
   &__OutputField {
+    // padding: 1rem;
     padding: 1rem;
     border-radius: $border-radius;
     background: grey;
@@ -102,5 +124,14 @@ $transition: background-color 0.2s ease-in-out;
     line-height: 1.6rem;
     margin-top: 1rem;
     color: white;
+    span {
+      font-weight: bold;
+    }
+  }
+  &__Btn {
+    @include btn(90px);
+  }
+  &__errorMessage {
+    color: tomato;
   }
 }
