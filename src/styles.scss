@@ -2,18 +2,49 @@
 body,
 html {
   box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
 }
 
 *:focus {
   outline: none;
 }
 
-// variables //////////////////////////////////////////////////////////////////
+// variables ///////////////////////////
+
 $mainWhite: #e9e9e9;
 $generic-bg-hover: rgba(0, 0, 0, 0.5);
 $generic-bg: rgba(0, 0, 0, 0.25);
 
 $border-radius: 8px;
+$border-radius-small: 4px;
+$font-size: 1.6rem;
+$transition: background-color 0.2s ease-in-out;
+
+// mixin ///////////////////////////////
+
+@mixin btn($width) {
+  width: $width;
+  background-color: $generic-bg;
+  color: $mainWhite;
+  border: 1px solid transparent;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: $font-size;
+  line-height: 17px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  border-radius: $border-radius-small;
+  text-align: center;
+  cursor: pointer;
+  transition: $transition;
+  &:hover {
+    transition: $transition;
+    background-color: $generic-bg-hover;
+  }
+}
 
 .appContainer {
   width: 100vw;
@@ -21,7 +52,7 @@ $border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: 30s colorTransition infinite cubic-bezier(1, 0, 0, 1);
+  // animation: 30s colorTransition infinite cubic-bezier(1, 0, 0, 1);
 }
 
 .inputContainer {
@@ -58,7 +89,6 @@ $border-radius: 8px;
     outline: none;
   }
   &__OutputField {
-    // padding: 1rem;
     padding: 1rem;
     border-radius: $border-radius;
     background: grey;
