@@ -8,7 +8,6 @@ export const PhoneInput = () => {
   const [submit, setSubmit] = useState(false);
 
   const handleChange = number => {
-    console.log("number", number);
     // remove non-digits
     let digitsOnlyNumber = number.replace(/\D/g, "");
     let usNumber = "";
@@ -59,81 +58,81 @@ export const PhoneInput = () => {
     <>
         {submit ? (
             <div className="inputContainer submitModal">
-          <h1 className="inputContainer__Header --submitMessage">
-            Thank you for your interest in Talon.One, a representative will be
-            in touch will you shortly.
-          </h1>
+                <h1 className="inputContainer__Header --submitMessage">
+                    Thank you for your interest in Talon.One, a representative will be
+                    in touch will you shortly.
+                </h1>
 
-          <div className="inputContainer__logoContainer">
-            <img
-              className="inputContainer__logo"
-              src={talonLogo}
-              alt="talonlogo"
-            />
-            <button
-              type="button"
-              className="inputContainer__Btn --return"
-              onClick={() => reset()}
-            >
-              Return
-            </button>
-            <div className="triangle-topleft"></div>
-            <div className="triangle-bottomright"></div>
-            <div className="triangle-bottomleft"></div>
-          </div>
-        </div>
-      ) : (
-        <div className={`inputContainer  ${error ? "activeError" : ""}`}>
-          <h3 className="inputContainer__Header">
-            Please submit your phone number here and we'll get back to you as
-            soon as possible
-          </h3>
-
-          <form className="inputContainer__Form" onSubmit={handleSubmit}>
-            <div className="inputContainer__phoneDetails">
-              <label className="inputContainer__label">Phone:</label>
-              <input
-                disabled={error ? true : false}
-                type="string"
-                className="inputContainer__Input"
-                placeholder={
-                  error
-                    ? "Incorrect entry - try again"
-                    : "Please add your phone number here"
-                }
-                value={reformattedNumber}
-                onChange={e => handleChange(e.target.value)}
-              />
+                <div className="inputContainer__logoContainer">
+                    <img
+                        className="inputContainer__logo"
+                        src={talonLogo}
+                        alt="talonlogo"
+                    />
+                    <button
+                        type="button"
+                        className="inputContainer__Btn --return"
+                        onClick={() => reset()}
+                    >
+                        Return
+                    </button>
+                    <div className="triangle-topleft"></div>
+                    <div className="triangle-bottomright"></div>
+                    <div className="triangle-bottomleft"></div>
+                </div>
             </div>
-            <p className="inputContainer__OutputField">
-              Value:<span>{plusOneNumber}</span>
-            </p>
-            {error && (
-              <>
-                <p className="inputContainer__errorMessage">{error}</p>
-              </>
-            )}
-            {submit && (
-              <>
-                <p className="inputContainer__errorMessage inputContainer__submitMessage">
-                  Thank you for your interest in Talon.One, a representative
-                  will be in touch will you shortly.
-                </p>
-                <img
-                  className="inputContainer__logo"
-                  src="./img/T1_logo.svg"
-                  alt="talonlogo"
-                />
-              </>
-            )}
-            <div className="inputContainer__btnContainer">
-              <button
-                type="submit"
-                className="inputContainer__Btn --submit"
-                disabled={reformattedNumber.length < 11 ? true : false}
-              >
-                Submit
-              </button>
+        ) : (
+            <div className={`inputContainer  ${error ? "activeError" : ""}`}>
+                <h3 className="inputContainer__Header">
+                    Please submit your phone number here and we'll get back to you as
+                    soon as possible
+                </h3>
+
+                <form className="inputContainer__Form" onSubmit={handleSubmit}>
+                    <div className="inputContainer__phoneDetails">
+                        <label className="inputContainer__label">Phone:</label>
+                        <input
+                            disabled={error ? true : false}
+                            type="string"
+                            className="inputContainer__Input"
+                            placeholder={
+                                error
+                                    ? "Incorrect entry - try again"
+                                    : "Please add your phone number here"
+                            }
+                            value={reformattedNumber}
+                            onChange={e => handleChange(e.target.value)}
+                        />
+                    </div>
+                    <p className="inputContainer__OutputField">
+                        Value:<span>{plusOneNumber}</span>
+                    </p>
+                    {error && (
+                        <>
+                            <p className="inputContainer__errorMessage">{error}</p>
+                        </>
+                    )}
+                    {submit && (
+                        <>
+                            <p className="inputContainer__errorMessage inputContainer__submitMessage">
+                                Thank you for your interest in Talon.One, a representative
+                                will be in touch with you shortly.
+                            </p>
+                            <img
+                                className="inputContainer__logo"
+                                src="./img/T1_logo.svg"
+                                alt="talonlogo"
+                            />
+                        </>
+                    )}
+                    <div className="inputContainer__btnContainer">
+                        <button
+                            type="submit"
+                            className="inputContainer__Btn --submit"
+                            disabled={reformattedNumber.length < 16 ? true : false}
+                        >
+                            Submit
+                        </button>
               <button
                 type="button"
                 className="inputContainer__Btn --reset"
