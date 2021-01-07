@@ -6,7 +6,7 @@ export const PhoneInput = () => {
   const [reformattedNumber, setReformattedNumber] = useState("");
 
   const handleChange = number => {
-    console.log("e", number);
+    console.log("number", number);
     let digitsOnlyNumber = number.replace(/\D/g, "");
     let usNumber = "";
     if (digitsOnlyNumber) {
@@ -50,41 +50,46 @@ export const PhoneInput = () => {
   };
 
   return (
-    <div className="inputContainer">
-      <h3 className="inputContainer__Header">
-        Please submit your phone number here and we'll get back to you promptly
-      </h3>
+    <div className={`inputContainer ${error ? "activeError" : ""}`}>
+        <h3 className="inputContainer__Header">
+            Please submit your phone number here and we'll get back to you promptly
+        </h3>
 
-      <form
-        className="inputContainer__Form"
-        onSubmit={e => {
-          e.preventDefault();
-          reset();
-        }}
-      >
-        <div className="inputContainer__phoneDetails">
-          <label className="inputContainer__label">Phone:</label>
-          <input
-            disabled={error ? true : false}
-            type="string"
-            className="inputContainer__Input"
-            placeholder="Please add your phone number here - (xxx) xxx-xxxx"
-            value={reformattedNumber}
-            onChange={e => handleChange(e.target.value)}
-          />
-        </div>
-        <p className="inputContainer__OutputField">
-          <span>Value: {plusOneNumber}</span>
-        </p>
-        {error && (
-          <>
-            <p className="inputContainer__errorMessage">{error}</p>
-          </>
-        )}
-        <button type="submit" className="inputContainer__Btn">
-          Reset
-        </button>
-      </form>
+        <form
+            className="inputContainer__Form"
+            onSubmit={e => {
+                e.preventDefault();
+                reset();
+            }}
+        >
+            <div className="inputContainer__phoneDetails">
+                <label className="inputContainer__label">Phone:</label>
+                <input
+                    disabled={error ? true : false}
+                    type="string"
+                    className="inputContainer__Input"
+                    placeholder="Please add your phone number here - (xxx) xxx-xxxx"
+                    value={reformattedNumber}
+                    onChange={e => handleChange(e.target.value)}
+                />
+            </div>
+            <p className="inputContainer__OutputField">
+                <span>Value: {plusOneNumber}</span>
+            </p>
+            {error && (
+                <>
+                    <p className="inputContainer__errorMessage">{error}</p>
+                </>
+            )}
+            <div className="inputContainer__btnContainer">
+                <button type="submit" className="inputContainer__Btn --submit">
+                    Submit
+                </button>
+                <button type="submit" className="inputContainer__Btn">
+                    Reset
+                </button>
+            </div>
+        </form>
     </div>
   );
 };

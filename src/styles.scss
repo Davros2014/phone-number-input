@@ -64,7 +64,7 @@ $transition: background-color 0.2s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
-  // animation: 30s colorTransition infinite cubic-bezier(1, 0, 0, 1);
+  animation: 30s colorTransition infinite cubic-bezier(1, 0, 0, 1);
 }
 
 .inputContainer {
@@ -97,7 +97,7 @@ $transition: background-color 0.2s ease-in-out;
   }
   &__label {
     padding: 1rem;
-    background: grey;
+    background: $generic-bg;
     color: white;
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
@@ -133,5 +133,40 @@ $transition: background-color 0.2s ease-in-out;
   }
   &__errorMessage {
     color: tomato;
+  }
+  &__btnContainer {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+  }
+}
+
+.activeError {
+  animation: 0.5s shake forwards ease-in;
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-2px, 0, 0);
+    filter: blur(0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(3px, 0, 0);
+    filter: blur(0.25);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-5px, 0, 0);
+    filter: blur(0.5);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(5px, 0, 0);
+    filter: blur(0.25);
   }
 }
