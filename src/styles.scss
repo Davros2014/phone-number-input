@@ -9,6 +9,7 @@ html {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 1rem;
 }
 
 *:focus {
@@ -51,7 +52,7 @@ $MainBlack-ebony: #0b121c;
   margin-top: 10px;
   font-weight: bold;
   font-size: $font-size;
-  line-height: 17px;
+  line-height: 16px;
   padding: 0.5rem 1rem 0.5rem 1rem;
   position: relative;
   display: inline-block;
@@ -111,6 +112,7 @@ body {
 }
 
 .inputContainer {
+  overflow: hidden;
   background: #fff;
   margin: 0 auto;
   max-width: 30vw;
@@ -124,8 +126,14 @@ body {
   &__Header {
     font-weight: 700;
     text-align: center;
+    font-size: 1rem;
+    line-height: 1.4;
     padding-bottom: 1rem;
     color: $MainDarkBlue-BlueZodiac;
+    &.--submitMessage {
+      font-size: 1.25rem;
+      color: $MainDarkBlue-BlueZodiac;
+    }
   }
   &__Form {
     display: flex;
@@ -152,7 +160,7 @@ body {
   }
   &__Input {
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border: 1px solid lightgrey;
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
@@ -161,7 +169,7 @@ body {
     font-weight: bold;
     &:focus {
       transition: $transition;
-      background: rgba(19, 105, 254, 0.2);
+      background: rgba(19, 105, 254, 0.1);
       color: $MainMidBlue-BlueRibbon;
     }
     &::placeholder {
@@ -172,7 +180,7 @@ body {
     }
   }
   &__OutputField {
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border-radius: $border-radius;
     background: linear-gradient(
       0deg,
@@ -183,18 +191,22 @@ body {
     line-height: 1.6rem;
     margin-top: 1rem;
     color: white;
+    font-weight: bold;
     span {
-      font-weight: bold;
+      margin-right: 1rem;
+      padding-left: 1rem;
     }
   }
   &__Btn {
     @include btn(90px);
     margin: 0.5rem;
     margin-bottom: 0;
+    &.--return {
+      margin-bottom: 1rem;
+    }
     &:active {
       transition: $transition;
       background: $MainLightBlue-CyanAqua;
-      color: $MainDarkBlue-BlueZodiac;
       transform: scale(0.9);
     }
   }
@@ -210,6 +222,51 @@ body {
     justify-content: space-around;
     margin-bottom: 1rem;
   }
+  &__logoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__logo {
+    width: 50%;
+    margin-bottom: 2rem;
+  }
+}
+
+.inputContainer .submitModal {
+  animation: 0.25s fadeIn forwards ease-in;
+}
+
+.triangle-topleft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 50%;
+  border-top: 150px solid $MainLightBlue-CyanAqua;
+  border-right: 150px solid transparent;
+  z-index: -1;
+}
+.triangle-bottomright {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0%;
+  height: 0%;
+  border-bottom: 80px solid $MainDarkBlue-BlueZodiac;
+  border-left: 80px solid transparent;
+  z-index: -1;
+}
+.triangle-bottomleft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 0%;
+  border-bottom: 400px solid $MainLightBlue-CyanAqua;
+  border-right: 400px solid transparent;
+  z-index: -1;
+  opacity: 0.15;
 }
 
 .activeError {
@@ -218,56 +275,20 @@ body {
 
 // animation keyframes //////////////////////////
 
-// @keyframes colorTransition {
-//   0% {
-//     background: linear-gradient(
-//       90deg,
-//       rgba(102, 114, 147, 1) 10%,
-//       rgba(103, 8, 102, 1) 75%
-//     );
-//   }
-//   30% {
-//     background: linear-gradient(
-//       90deg,
-//       rgba(69, 88, 143, 1) 16%,
-//       rgba(51, 8, 103, 1) 75%
-//     );
-//   }
-//   50% {
-//     background: linear-gradient(
-//       90deg,
-//       rgba(69, 119, 143, 1) 16%,
-//       rgba(103, 8, 39, 1) 75%
-//     );
-//   }
-//   70% {
-//     background: linear-gradient(
-//       90deg,
-//       rgba(69, 143, 71, 1) 16%,
-//       rgba(223, 25, 89, 1) 75%
-//     );
-//   }
-//   85% {
-//     background: linear-gradient(
-//       90deg,
-//       rgba(69, 119, 143, 1) 16%,
-//       rgba(103, 8, 39, 1) 75%
-//     );
-//   }
-//   100% {
-//     background: linear-gradient(
-//       90deg,
-//       rgba(102, 114, 147, 1) 10%,
-//       rgba(103, 8, 102, 1) 75%
-//     );
-//   }
-// }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  0% {
+    opacity: 1;
+  }
+}
 @keyframes bounceIn {
   0% {
     transform: scale(0.95);
   }
   80% {
-    transform: scale(1.15);
+    transform: scale(1.08);
   }
   100% {
     transform: scale(1);
@@ -290,7 +311,6 @@ body {
     transform: translate3d(-5px, 0, 0);
     filter: blur(0.5);
   }
-
   40%,
   60% {
     transform: translate3d(5px, 0, 0);
