@@ -68,7 +68,11 @@ export const PhoneInput = () => {
                     disabled={error ? true : false}
                     type="string"
                     className="inputContainer__Input"
-                    placeholder="Please add your phone number here - (xxx) xxx-xxxx"
+                    placeholder={
+                        error
+                            ? "Incorrect entry - try again"
+                            : "Please add your phone number here"
+                    }
                     value={reformattedNumber}
                     onChange={e => handleChange(e.target.value)}
                 />
@@ -85,7 +89,11 @@ export const PhoneInput = () => {
                 <button type="submit" className="inputContainer__Btn --submit">
                     Submit
                 </button>
-                <button type="submit" className="inputContainer__Btn">
+                <button
+                    type="submit"
+                    className="inputContainer__Btn --reset"
+                    disabled={reformattedNumber.length < 10 ? false : true}
+                >
                     Reset
                 </button>
             </div>

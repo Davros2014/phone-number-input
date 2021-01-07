@@ -27,12 +27,26 @@ $border-radius-small: 4px;
 $font-size: 1rem;
 $transition: background-color 0.2s ease-in-out;
 
+$MainLightBlue-CyanAqua: #01d3fe;
+$MainMidBlue-BlueRibbon: #1369fe;
+$MainDarkBlue-BlueZodiac: #0c1c36;
+
+$AccentColor1-SelectiveYellow: #f2b401;
+$AccentColor-OldGold: #d2a63e;
+$AccentColor3-CreamCan: #f5d76c;
+
+$MainMidGrey: #6b6b6c;
+$MainLightGrey-AthensGray: #eeedf3;
+
+$MainBlack-ebony: #0b121c;
+
 // mixin ///////////////////////////////
 
 @mixin btn($width) {
   width: $width;
-  background-color: $generic-bg;
+  background: $MainMidBlue-BlueRibbon;
   color: $mainWhite;
+  outline: none;
   border: 1px solid transparent;
   margin-top: 10px;
   font-weight: bold;
@@ -48,7 +62,7 @@ $transition: background-color 0.2s ease-in-out;
   transition: $transition;
   &:hover {
     transition: $transition;
-    background-color: $generic-bg-hover;
+    background: $MainDarkBlue-BlueZodiac;
   }
 }
 
@@ -58,30 +72,60 @@ $transition: background-color 0.2s ease-in-out;
   }
 }
 
+body {
+  height: 100vh;
+  width: 100vw;
+  background: rgba(255, 255, 255, 0.2) url("./img/desktopBackdrop_talonOne.png")
+    no-repeat fixed center;
+  background-size: cover;
+  backdrop-filter: blur(10px) saturate(70%);
+  animation: 1s blur forwards ease-in-out;
+  @include mq(979px) {
+    background: $MainLightBlue-CyanAqua url("./img/tabletBackdrop_talonOne.png")
+      no-repeat fixed center;
+    background-size: cover;
+  }
+  @include mq(600px) {
+    background: $MainLightBlue-CyanAqua url("./img/mobileBackdrop_talonOne.png")
+      no-repeat fixed center;
+    background-size: cover;
+  }
+}
+
+@keyframes blur {
+  0% {
+    backdrop-filter: blur(0px) saturate(100%);
+  }
+  100% {
+    backdrop-filter: blur(10px) saturate(70%);
+  }
+}
+
 .appContainer {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: 30s colorTransition infinite cubic-bezier(1, 0, 0, 1);
+  // animation: 30s colorTransition infinite cubic-bezier(1, 0, 0, 1);
 }
 
 .inputContainer {
   background: #fff;
-  // width: 30vw;
   margin: 0 auto;
+  max-width: 30vw;
   padding: 1rem 3rem;
   border-radius: 5px;
   box-shadow: 0px 0px 3px 6px rgba(0, 0, 0, 0.0825);
-  animation: 0.5s bounceIn forwards ease-in;
-  @include mq(900px) {
+  animation: 0.5s bounceIn forwards ease-in-out;
+  @include mq(1200px) {
     max-width: 90vw;
   }
   &__Header {
     font-weight: 700;
     text-align: center;
     padding-bottom: 1rem;
+    color: $MainDarkBlue-BlueZodiac;
   }
   &__Form {
     display: flex;
@@ -97,7 +141,11 @@ $transition: background-color 0.2s ease-in-out;
   }
   &__label {
     padding: 1rem;
-    background: $generic-bg;
+    background: linear-gradient(
+      0deg,
+      $MainMidBlue-BlueRibbon 10%,
+      $MainLightBlue-CyanAqua 90%
+    );
     color: white;
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
@@ -110,16 +158,27 @@ $transition: background-color 0.2s ease-in-out;
     border-bottom-right-radius: $border-radius;
     border-left: none;
     outline: none;
-    :focus {
-      background: red;
-      color: white;
+    font-weight: bold;
+    &:focus {
+      transition: $transition;
+      background: rgba(19, 105, 254, 0.2);
+      color: $MainMidBlue-BlueRibbon;
+    }
+    &::placeholder {
+      color: lightgrey;
+    }
+    &:focus::placeholder {
+      color: grey;
     }
   }
   &__OutputField {
-    // padding: 1rem;
     padding: 1rem;
     border-radius: $border-radius;
-    background: grey;
+    background: linear-gradient(
+      0deg,
+      $MainMidBlue-BlueRibbon 10%,
+      $MainLightBlue-CyanAqua 90%
+    );
     width: 100%;
     line-height: 1.6rem;
     margin-top: 1rem;
@@ -130,9 +189,21 @@ $transition: background-color 0.2s ease-in-out;
   }
   &__Btn {
     @include btn(90px);
+    margin: 0.5rem;
+    margin-bottom: 0;
+    &:active {
+      transition: $transition;
+      background: $MainLightBlue-CyanAqua;
+      color: $MainDarkBlue-BlueZodiac;
+      transform: scale(0.9);
+    }
   }
+
   &__errorMessage {
     color: tomato;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
   }
   &__btnContainer {
     display: flex;
@@ -144,19 +215,75 @@ $transition: background-color 0.2s ease-in-out;
 .activeError {
   animation: 0.5s shake forwards ease-in;
 }
+
+// animation keyframes //////////////////////////
+
+// @keyframes colorTransition {
+//   0% {
+//     background: linear-gradient(
+//       90deg,
+//       rgba(102, 114, 147, 1) 10%,
+//       rgba(103, 8, 102, 1) 75%
+//     );
+//   }
+//   30% {
+//     background: linear-gradient(
+//       90deg,
+//       rgba(69, 88, 143, 1) 16%,
+//       rgba(51, 8, 103, 1) 75%
+//     );
+//   }
+//   50% {
+//     background: linear-gradient(
+//       90deg,
+//       rgba(69, 119, 143, 1) 16%,
+//       rgba(103, 8, 39, 1) 75%
+//     );
+//   }
+//   70% {
+//     background: linear-gradient(
+//       90deg,
+//       rgba(69, 143, 71, 1) 16%,
+//       rgba(223, 25, 89, 1) 75%
+//     );
+//   }
+//   85% {
+//     background: linear-gradient(
+//       90deg,
+//       rgba(69, 119, 143, 1) 16%,
+//       rgba(103, 8, 39, 1) 75%
+//     );
+//   }
+//   100% {
+//     background: linear-gradient(
+//       90deg,
+//       rgba(102, 114, 147, 1) 10%,
+//       rgba(103, 8, 102, 1) 75%
+//     );
+//   }
+// }
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.95);
+  }
+  80% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 @keyframes shake {
   10%,
   90% {
     transform: translate3d(-2px, 0, 0);
     filter: blur(0);
   }
-
   20%,
   80% {
     transform: translate3d(3px, 0, 0);
     filter: blur(0.25);
   }
-
   30%,
   50%,
   70% {
