@@ -9,14 +9,13 @@ export const PhoneInput = () => {
 
   const handleChange = number => {
     console.log("number", number);
+    // remove non-digits
     let digitsOnlyNumber = number.replace(/\D/g, "");
     let usNumber = "";
     if (digitsOnlyNumber) {
       usNumber = "+1 " + digitsOnlyNumber;
     }
-
     let inputLength = digitsOnlyNumber.length;
-
     let usFormattedNumber = "";
 
     if (inputLength < 4) {
@@ -32,7 +31,6 @@ export const PhoneInput = () => {
         3
       )}) ${digitsOnlyNumber.slice(3, 6)} - ${digitsOnlyNumber.slice(6, 11)}`;
     }
-    console.log("inputLength", inputLength);
     validateLength(digitsOnlyNumber);
     setReformattedNumber(usFormattedNumber);
     setPlusOneNumber(usNumber);
@@ -55,22 +53,16 @@ export const PhoneInput = () => {
   const handleSubmit = e => {
     e.preventDefault();
     setSubmit(!submit);
-    console.log("form submitted");
   };
-
-  // onSubmit={e => {
-  //     e.preventDefault();
-  //     reset();
-  // }}
 
   return (
     <>
         {submit ? (
-            <div className={`inputContainer  ${submit ? "submitModal" : ""}`}>
-                <h1 className="inputContainer__Header --submitMessage">
-                    Thank you for your interest in Talon.One, a representative will be
-                    in touch will you shortly.
-                </h1>
+            <div className="inputContainer submitModal">
+          <h1 className="inputContainer__Header --submitMessage">
+            Thank you for your interest in Talon.One, a representative will be
+            in touch will you shortly.
+          </h1>
 
           <div className="inputContainer__logoContainer">
             <img
